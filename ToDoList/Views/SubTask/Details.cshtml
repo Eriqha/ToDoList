@@ -1,0 +1,45 @@
+﻿@model ToDoList.Models.SubTask
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>SubTask Details</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h4>SubTask</h4>
+        <dl class="row">
+            <!-- Title -->
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <!-- IsDone -->
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.IsDone)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.IsDone)
+            </dd>
+
+            <!-- ToDoItem -->
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.ToDoItem)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.ToDoItem.Id)
+            </dd>
+        </dl>
+
+        <div class="mt-3">
+            <!-- Edit and Back Links -->
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a> |
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@model ToDoList.Models.SubTask
+
+@{
+    ViewData["Title"] = "Create SubTask";
+}
+
+<h1>Create SubTask</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h4>SubTask</h4>
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Title Field -->
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <!-- IsDone Checkbox -->
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsDone" /> @Html.DisplayNameFor(model => model.IsDone)
+                </label>
+            </div>
+
+            <!-- ToDoItemId Dropdown -->
+            <div class="form-group">
+                <label asp-for="ToDoItemId" class="control-label"></label>
+                <select asp-for="ToDoItemId" class="form-control" asp-items="ViewBag.ToDoItemId"></select>
+                <span asp-validation-for="ToDoItemId" class="text-danger"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <!-- Back Link -->
+        <div>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

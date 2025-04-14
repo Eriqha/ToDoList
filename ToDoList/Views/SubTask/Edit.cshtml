@@ -1,0 +1,58 @@
+﻿@model ToDoList.Models.SubTask
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit SubTask</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Hidden Id Field -->
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Title Input -->
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" placeholder="Enter task title" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <!-- IsDone Checkbox -->
+            <div class="form-group form-check">
+                <input class="form-check-input" asp-for="IsDone" />
+                <label class="form-check-label" for="IsDone">
+                    @Html.DisplayNameFor(model => model.IsDone)
+                </label>
+            </div>
+
+            <!-- ToDoItem Dropdown -->
+            <div class="form-group">
+                <label asp-for="ToDoItemId" class="control-label"></label>
+                <select asp-for="ToDoItemId" class="form-control" asp-items="ViewBag.ToDoItemId">
+                    <option value="">Select ToDoItem</option>
+                </select>
+                <span asp-validation-for="ToDoItemId" class="text-danger"></span>
+            </div>
+
+            <!-- Save Button -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,111 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ToDoList</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ToDoList.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="bg-dark text-white p-3" style="width: 250px; min-height: 100vh;">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <h4 class="text-center">ToDoList</h4>
+                <hr class="text-white" />
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white" asp-controller="Home" asp-action="Index">
+                            <i class="fas fa-home me-2"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white" asp-controller="Category" asp-action="Index">
+                            <i class="fas fa-tags me-2"></i> Category
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white" asp-controller="User" asp-action="Index">
+                            <i class="fas fa-user me-2"></i> User
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white" asp-controller="ToDoItem" asp-action="Index">
+                            <i class="fas fa-tasks me-2"></i> TodoItem
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white" asp-controller="SubTask" asp-action="Index">
+                            <i class="fas fa-list-ul me-2"></i> SubTask
+                        </a>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home")">
+                            <button type="submit" class="btn btn-link text-white">
+                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            }
+            else
+            {
+                <h4 class="text-center">Welcome!</h4>
+                <hr class="text-white" />
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">
+                            <i class="fas fa-sign-in-alt me-2"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register">
+                            <i class="fas fa-user-plus me-2"></i> Register
+                        </a>
+                    </li>
+                </ul>
+            }
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-grow-1">
+            <header>
+                <nav class="navbar navbar-light bg-white border-bottom py-3">
+                    <div class="container-fluid d-flex justify-content-between align-items-center">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <strong>Hello, @User.Identity?.Name</strong>
+                        }
+                    </div>
+                </nav>
+            </header>
+
+            <main class="container-fluid py-4">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-top footer text-muted text-center py-2">
+        &copy; 2025 - ToDoList - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+</html>
